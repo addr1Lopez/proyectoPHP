@@ -1,54 +1,72 @@
 <?php
 
+$hayError = FALSE;
+$errores = [];
+$fcha = date("Y-m-d");
 
+include('../controllers/utilsforms.php');
 
-include('../views/formulario_tarea.php');
+if (!$_POST) { // Si no han enviado el formulario
+    include("../views/formulario_tarea.php");
+} else {
 
-/* Validar nombre */
-if (isset($_POST['nombre']) && empty($_POST['nombre'])) {
-    echo '<p style="color: red">El campo nombre no puede estar vacío</p>';
+    /* Validar nombre */
+    if (isset($_POST['nombre']) && empty($_POST['nombre'])) {
+        $errores['nombre'] = 'El campo nombre no puede estar vacío';
+        $hayError = TRUE;
+    }
+
+    /* Validar apellidos */
+    if (isset($_POST['apellidos']) && empty($_POST['apellidos'])) {
+        $errores['apellidos'] = 'El campo apellidos no puede estar vacío';
+        $hayError = TRUE;
+    }
+
+    /* Validar descripción */
+    if (isset($_POST['textoDescripcion']) && empty($_POST['textoDescripcion'])) {
+        $errores['textoDescripcion'] = 'El campo descripción no puede estar vacío';
+        $hayError = TRUE;
+    }
+
+    /* Validar DNI español*/
+    $dni = $_POST['dni'];
+    if (empty($dni) || !validarDni($dni)) {
+        $errores['dni'] = 'El campo DNI está vacío o no es correcto';
+        $hayError = TRUE;
+    }
+
+    /* Validar telefono español*/
+    $telefono = $_POST['telefono'];
+    if (empty($telefono) || !validarTelefono($telefono)) {
+        $errores['telefono'] = 'El campo teléfono está vacío o no es válido';
+        $hayError = TRUE;
+    }
+
+    /* Validar codigo postal español */
+    $codigoPostal = $_POST['codigoPostal'];
+    if (empty($codigoPostal) || !validarCodigoPostal($codigoPostal)) {
+        $errores['codigoPostal'] = 'El campo código postal está vacío o no es válido';
+        $hayError = TRUE;
+    }
+
+    /* Validar correo electrónico */
+    $correo = $_POST['correo'];
+    if (empty($correo) || !validarEmail($correo)) {
+        $errores['correo'] = 'El campo email está vacío o no es válido';
+        $hayError = TRUE;
+    }
+
+    /* Validar fecha de realizacion */
+    $fechaRealizacion = $_POST['fechaRealizacion'];
+    if (empty($fechaRealizacion) || !validarFechaRealizacion($fechaRealizacion)) {
+        $errores['fechaRealizacion'] = 'La fecha de realización está vacía o no es válida';
+        $hayError = TRUE;
+    }
+
+    if ($hayError) {
+        include("../views/formulario_tarea.php");
+    }
 }
-
-/* Validar apellidos */
-if (isset($_POST['apellidos']) && empty($_POST['apellidos'])) {
-    echo '<p style="color: red">El campo apellidos no puede estar vacío</p>';
-}
-
-/* Validar descripción */
-if (isset($_POST['textoDescripcion']) && empty($_POST['textoDescripcion'])) {
-    echo '<p style="color: red">El campo descripción no puede estar vacío</p>';
-}
-
-/* Validar DNI español*/
-$dni = $_POST['dni'];
-if (empty($dni) || !validarDni($dni)) {
-    echo '<p style="color: red">El campo DNI está vacío o no es correcto</p>';
-}
-
-/* Validar telefono español*/
-$telefono = $_POST['telefono'];
-if (empty($telefono) || !validarTelefono($telefono)) {
-    echo '<p style="color: red">El telefono está vacío o no es válido</p>';
-}
-
-/* Validar codigo postal español */
-$codigoPostal = $_POST['codigoPostal'];
-if (empty($codigoPostal) || !validarCodigoPostal($codigoPostal)) {
-    echo '<p style="color: red">El código postal está vacío o no es válido</p>';
-}
-
-/* Validar correo electrónico */
-$correo = $_POST['correo'];
-if (empty($correo) || !validarEmail($correo)) {
-    echo '<p style="color: red">El correo electrónico está vacío o no es válido</p>';
-}
-
-/* Validar fecha de realizacion */
-$fechaRealizacion = $_POST['fechaRealizacion'];
-if (empty($fechaRealizacion) || !validarFechaRealizacion($fechaRealizacion)) {
-    echo '<p style="color: red">La fecha de realización está vacía o no es válida</p>';
-}
-
 
 
 /* FUNCIONES */
