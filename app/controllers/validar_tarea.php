@@ -1,10 +1,12 @@
 <?php
+include('../controllers/utilsforms.php');
+include('../models/conexion.php');
 
 $hayError = FALSE;
 $errores = [];
 $fcha = date("Y-m-d");
 
-include('../controllers/utilsforms.php');
+$conexion = Conexion::getInstance();
 
 if (!$_POST) { // Si no han enviado el formulario
     include("../views/formulario_tarea.php");
