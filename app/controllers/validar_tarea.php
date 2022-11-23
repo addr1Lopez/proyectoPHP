@@ -1,12 +1,23 @@
 <?php
 include('../controllers/utilsforms.php');
-include('../models/conexion.php');
+include('../controllers/creaselect.php');
+
+include('../models/bd.php');
+include('../models/claseprovincia.php');
+include('../models/claseusuarios.php');
+
+include('../libraries/validarcodpostal.php');
+include('../libraries/validardni.php');
+include('../libraries/validarcif.php');
+include('../libraries/validaremail.php');
+include('../libraries/validarfecha.php');
+include('../libraries/validartelefono.php');
 
 $hayError = FALSE;
 $errores = [];
 $fcha = date("Y-m-d");
 
-$conexion = Conexion::getInstance();
+$conexion = BD::getInstance();
 
 if (!$_POST) { // Si no han enviado el formulario
     include("../views/formulario_tarea.php");
@@ -31,9 +42,9 @@ if (!$_POST) { // Si no han enviado el formulario
     }
 
     /* Validar DNI español*/
-    $dni = $_POST['dni'];
-    if (empty($dni) || !validarDni($dni)) {
-        $errores['dni'] = 'El campo DNI está vacío o no es correcto';
+    $nif_cif = $_POST['nif_cif'];
+    if (!validarDni($nif_cif) && !validarcif($nif_cif)) {
+        $errores['nif_cif'] = 'El campo NIF / CIF no es válido';
         $hayError = TRUE;
     }
 
@@ -72,7 +83,7 @@ if (!$_POST) { // Si no han enviado el formulario
 
 
 /* FUNCIONES */
-
+/*
 function validarDni($dni)
 {
     $dnisL = substr($dni, 0, -1);
@@ -127,3 +138,4 @@ function validarFechaRealizacion($fecha)
         return true;
     }
 }
+*/

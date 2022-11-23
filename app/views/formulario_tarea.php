@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
+    
     <form action="../controllers/validar_tarea.php" method="post">
-        <label>NIF o CIF</label> <input type="text" name="dni" value="<?= ValorPost('dni') ?>">
-        <?= VerError('dni') ?>
+        <label>NIF o CIF</label> <input type="text" name="nif_cif" value="<?= ValorPost('nif_cif') ?>">
+        <?= VerError('nif_cif') ?>
         <br></br>
 
         <label>Persona de contacto: </label> <br></br>
@@ -47,17 +47,8 @@
         <br></br>
 
         <label>Provincia</label>
-        <select name="selectProvincia" id="provincias">
-            <option value="b" selected>---Seleccione una provincia  ---</option>
-            <?php
-            $provincias = $conexion->getProvincia();
-            foreach ($provincias as $item => $value) {
-            ?>
-                <option value="<?php echo $item ?>"><?php echo $value ?></option>
-            <?php
-            }
-            ?>
-        </select>
+
+        <?= CreaSelect('prov', Provincia::listaParaSelect(), filter_input(INPUT_POST, 'prov')) ?>
 
         <br></br>
 
@@ -75,17 +66,9 @@
 
 
         <label>Operario encargado</label>
-        <select name="selectOperario" id="operario">
-        <option value="b" selected>---Seleccione un operario  ---</option>
-        <?php
-            $operarios = $conexion->getOperario();
-            foreach ($operarios as $item => $value) {
-            ?>
-                <option value="<?php echo $item ?>"><?php echo $item . " " . $value ?></option>
-            <?php
-            }
-            ?>
-        </select>
+
+        <?= CreaSelect('trab', Usuario::listaParaSelect(), filter_input(INPUT_POST, 'trab')) ?>
+
         <br></br>
 
 

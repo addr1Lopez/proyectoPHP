@@ -1,7 +1,7 @@
 <?php
 
 /* Clase encargada de gestionar las conexiones a la base de datos */
-class Conexion
+class BD
 {
     public $pdo;
     private $stmt;
@@ -32,7 +32,7 @@ class Conexion
         $myArray = array();
         $this->stmt = $this->pdo->prepare('SELECT codPoblacion,nombre FROM poblacion');
         $this->stmt->execute();
-        
+
         while ($row = $this->stmt->fetch(PDO::FETCH_ASSOC)) {
             $myArray[$row['codPoblacion']] = $row['nombre'];
         }
@@ -44,7 +44,7 @@ class Conexion
         $myArray = array();
         $this->stmt = $this->pdo->prepare('SELECT nombre, apellidos FROM usuario WHERE esAdmin="0"');
         $this->stmt->execute();
-        
+
         while ($row = $this->stmt->fetch(PDO::FETCH_ASSOC)) {
             $myArray[$row['nombre']] = $row['apellidos'];
         }
@@ -63,5 +63,27 @@ class Conexion
         } catch (PDOException $e) {
             echo 'Falló la conexión: ' . $e->getMessage();
         }
+    }
+
+    function getListaSelect($tabla, $c_idx, $c_value, $condicion = "")
+    {
+        $this->stmt = $this->pdo->prepare('SELECT ' . $c_idx . ',' . $c_value . ' FROM ' . $tabla . " " . $condicion);
+        $this->stmt->execute();
+
+        $lista = array();
+        while ($row = $this->stmt->fetch(PDO::FETCH_ASSOC)) {
+            $lista[$row[$c_idx]] = $row[$c_value];
+        }
+        return $lista;
+    }
+
+    function insertarTarea()
+    {
+        $sql = "INSERT INTO tareas (cod_tarea,nif_cif,nombre,telefono,descripcion,correo,poblacion,codigoPostal,
+            provincia,estado,fechaCreacion,operarioEncargado,fechaRealizacion,anotacionesAnt,anotacionesPos)
+            VALUES(0,'48937837R','Víctor Martínez Domínguez','657121379','Caer muro','victor1@gmail.com','Valverde del Camino',
+            '21600','Huelva','P','2022-11-21','Rafael Hinestrosa','2022-11-22','Muro en mal estado','Muro derribado')";
+        $resultado = $this->db->prepare($sql);
+        $resultado->execute(array());
     }
 }
