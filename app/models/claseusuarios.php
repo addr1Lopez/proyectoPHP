@@ -13,6 +13,6 @@ class Usuario
 
     static function listaParaSelect()
     {
-        return BD::getInstance()->getListaSelect('usuario', 'nif', 'nombre', 'where esAdmin = 0');
+        return BD::getInstance()->getListaSelect('usuarios', 'nif', 'nombre', 'where esAdmin = 0');
     }
 }

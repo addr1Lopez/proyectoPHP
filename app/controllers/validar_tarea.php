@@ -78,6 +78,8 @@ if (!$_POST) { // Si no han enviado el formulario
 
     if ($hayError) {
         include("../views/formulario_tarea.php");
+    } else {
+        include("../controllers/getvalues.php");
     }
 }
 

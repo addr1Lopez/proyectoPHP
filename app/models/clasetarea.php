@@ -11,8 +11,8 @@ class Tarea
 
     //el static no funciona.
 
-    static function insertar()
+    static function insertar($nombre_campos, $valores)
     {
-        return BD::getInstance()->getListaSelect('usuario', 'nif', 'nombre', 'where esAdmin = 0');
+        return BD::getInstance()->insertarValores('tareas', $nombre_campos, $valores);
     }
 }

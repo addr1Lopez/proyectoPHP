@@ -5,14 +5,12 @@ class Provincia
     {
     }
 
-    /**
-     * Devuelve la lista de provincias para crear un select cod->nombre
+    /* 
+    Devuelve la lista de provincias para crear un select cod->nombre
      */
-
-    //el static no funciona.
 
     static function listaParaSelect()
     {
-        return BD::getInstance()->getListaSelect('poblacion', 'codPoblacion', 'nombre');
+        return BD::getInstance()->getListaSelect('provincias', 'codPoblacion', 'nombre');
     }
 }

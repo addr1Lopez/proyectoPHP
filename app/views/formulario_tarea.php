@@ -48,12 +48,12 @@
 
         <label>Provincia</label>
 
-        <?= CreaSelect('prov', Provincia::listaParaSelect(), filter_input(INPUT_POST, 'prov')) ?>
+        <?= CreaSelect('provincias', Provincia::listaParaSelect(), filter_input(INPUT_POST, 'provincias')) ?>
 
         <br></br>
 
         <label>Estado</label>
-        <select name="selectEstado" id="estado">
+        <select name="estado" id="estado">
             <option value="0">--- Seleccione un estado de tarea ---</option>
             <option value="B">Esperando ser aprobada</option>
             <option value="P">Pendiente</option>
@@ -67,7 +67,7 @@
 
         <label>Operario encargado</label>
 
-        <?= CreaSelect('trab', Usuario::listaParaSelect(), filter_input(INPUT_POST, 'trab')) ?>
+        <?= CreaSelect('operario_encargado', Usuario::listaParaSelect(), filter_input(INPUT_POST, 'operario_encargado')) ?>
 
         <br></br>
 
@@ -76,19 +76,19 @@
         <?= VerError('fechaRealizacion') ?>
         <br></br>
 
-        <label>Anotaciones anteriores</label> <br> <textarea name="textoAnotaAnt" id="anotaAnt" cols="30" rows="4"></textarea><br></br>
+        <label>Anotaciones anteriores</label> <br> <textarea name="anotacionesAnt" id="anotaAnt" cols="30" rows="4"></textarea><br></br>
 
 
-        <label>Anotaciones posteriores</label> <br> <textarea name="textoAnotaPost" id="anotaPost" cols="30" rows="4"></textarea><br></br>
+        <label>Anotaciones posteriores</label> <br> <textarea name="anotacionesPos" id="anotaPos" cols="30" rows="4"></textarea><br></br>
 
 
-        <label>Fichero resumen</label> <input type="file" name="ficheroResumen"><br></br>
+        <label>Fichero resumen</label> <input type="file" name=""><br></br>
 
 
-        <label>Fotos del trabajo realizado</label> <input type="file" name="fotosTrabajo"><br></br>
+        <label>Fotos del trabajo realizado</label> <input type="file" name=""><br></br>
 
 
-        <button type="submit" name="botonEnviar">Enviar</button>
+        <button type="submit" name="">Enviar</button>
 
     </form>
 </body>
