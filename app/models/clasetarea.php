@@ -15,4 +15,16 @@ class Tarea
     {
         return BD::getInstance()->insertarValores('tareas', $nombre_campos, $valores);
     }
+
+    static function getNumeroTareas(){
+           
+        return BD::getInstance()->numFilas('tareas');
+    }
+    
+    static function getTareasPorPagina($empezarDesde, $tamanioPagina){
+       
+        return BD::getInstance()->resultadosPorPagina('tareas', $empezarDesde, $tamanioPagina);
+    }    
+
+
 }

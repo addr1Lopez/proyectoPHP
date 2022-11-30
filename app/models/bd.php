@@ -51,6 +51,38 @@ class BD
         return $myArray;
     }
 
+    public function numFilas($tabla){
+
+        $sql = "SELECT * FROM " . $tabla; 
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute();
+
+        $numFilas = $resultado->rowCount();
+
+        return $numFilas;
+    }
+
+    public function resultadosPorPagina($tabla, $empezarDesde, $tamanioPagina){
+
+        $queryLimite = "SELECT * FROM " . $tabla . " LIMIT " . $empezarDesde . "," . $tamanioPagina;
+
+        $resultado = $this->pdo->prepare($queryLimite);
+        $resultado->execute();
+
+        //Almacenamos el resultado de fetchAll en una variable
+        $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+       /* while($registro = $resultado->fetch(PDO::FETCH_ASSOC)){
+
+            $lista = $registro["nombre"] . "<br>";
+
+            }*/
+
+
+        return $datos;
+    }
+    
     /*Realiza la conexión a la base de datos.*/
     public function conectar()
     {
@@ -63,6 +95,12 @@ class BD
         } catch (PDOException $e) {
             echo 'Falló la conexión: ' . $e->getMessage();
         }
+    }
+
+    function getNifUsuario($correo, $contraseña)
+    {
+        $stmt = $this->pdo->query("SELECT nif FROM usuarios WHERE correo='$correo' AND contraseña='$contraseña'");
+        return $stmt->fetch();
     }
 
     function getListaSelect($tabla, $c_idx, $c_value, $condicion = "")
@@ -90,4 +128,6 @@ class BD
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute(array());
     }
+
+
 }

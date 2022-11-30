@@ -1,0 +1,12 @@
+form {
+    margin-left: 1em;
+}
+
+.form-control,
+.form-select {
+    width: 22em;
+}
+
+.form-check-input {
+    width: 1em;
+}

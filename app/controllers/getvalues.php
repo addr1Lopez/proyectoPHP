@@ -37,7 +37,7 @@ $valores = substr($valores, 0, -1);
 
 $camposArray = explode(",", $nombre_campos);
 
-//var_dump($camposArray);
+var_dump($camposArray);
 
 echo "<br><br>";
 
