@@ -5,6 +5,7 @@ include('../controllers/creaselect.php');
 include('../models/bd.php');
 include('../models/claseprovincia.php');
 include('../models/claseusuarios.php');
+include('../models/clasetarea.php');
 
 include('../libraries/validarcodpostal.php');
 include('../libraries/validardni.php');
@@ -20,7 +21,13 @@ $fcha = date("Y-m-d"); // Habra que quitarlo porque lo de la fecha de creación 
 $conexion = BD::getInstance();
 
 if (!$_POST) { // Si no han enviado el formulario
-    include("../views/formulario_tarea.php");
+
+    $id = $_GET['id'];
+
+    $datosTarea = Tarea::getDatosTarea($id);
+
+    include("../views/formulario_modificarTarea.php");
+
 } else {
 
     /* Validar nombre */
@@ -77,9 +84,10 @@ if (!$_POST) { // Si no han enviado el formulario
     }
 
     if ($hayError) {
-        include("../views/formulario_tarea.php");
+        include("../views/formulario_modificarTarea.php");
     } else {
-        include("../controllers/getvalues.php");
+        include("../controllers/getvaluesModificar.php");
+        header("location:procesarListaTareas.php");
     }
 }
 

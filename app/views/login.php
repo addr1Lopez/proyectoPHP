@@ -10,7 +10,7 @@
 </head>
 <body>
     <form action="../controllers/validar_usuario.php" method="post">
-    <h2>LOGIN SEGURO USANDO SESIONES Y COOKIES</h2>
+    <h1>Inicio de sesión</h1>
     <br>
     <label>Correo:</label><input class="form-control" type="text" name="correo">
     <br>

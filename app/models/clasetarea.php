@@ -16,6 +16,17 @@ class Tarea
         return BD::getInstance()->insertarValores('tareas', $nombre_campos, $valores);
     }
 
+    static function borrar($id)
+    {
+        return BD::getInstance()->borrarTarea($id);
+    }
+
+    static function modificar($id)
+    {
+        return BD::getInstance()->modificarTarea($id);
+    }
+
+
     static function getNumeroTareas(){
            
         return BD::getInstance()->numFilas('tareas');
@@ -26,5 +37,7 @@ class Tarea
         return BD::getInstance()->resultadosPorPagina('tareas', $empezarDesde, $tamanioPagina);
     }    
 
-
+    static function getDatosTarea($id){
+        return BD::getInstance()->getTarea($id);    
+    }    
 }

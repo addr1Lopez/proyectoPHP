@@ -18,8 +18,7 @@
         <br>
 
         <h4 class="titulo-persona">Persona de contacto: </h4>
-        <br>
-
+        
         <label>Nombre:</label> <input type="text" class="form-control" name="nombre" value="<?= ValorPost('nombre') ?>">
         <?= VerError('nombre') ?>
         <br>

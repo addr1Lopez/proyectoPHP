@@ -42,9 +42,6 @@ var_dump($camposArray);
 echo "<br><br>";
 
 Tarea::insertar($valores, $camposArray);
-
-
-echo "Datos insertados correctamente";
+header('location:validarTarea.php');
 ?>
 
-<a href="../controllers/validar_tarea.php">Volver al formulario</a>

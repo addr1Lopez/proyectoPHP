@@ -65,7 +65,11 @@ class BD
 
     public function resultadosPorPagina($tabla, $empezarDesde, $tamanioPagina){
 
-        $queryLimite = "SELECT * FROM " . $tabla . " LIMIT " . $empezarDesde . "," . $tamanioPagina;
+        //$queryLimite = "SELECT * FROM " . $tabla . " LIMIT " . $empezarDesde . "," . $tamanioPagina;
+
+        $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,textoDescripcion,correo,direccion,poblacion,
+        codigoPostal,provincias,estado,DATE_FORMAT(fechaCreacion, '%d/%m/%Y') AS fechaCreacion,operario_encargado, DATE_FORMAT(fechaRealizacion, '%d/%m/%Y') AS fechaRealizacion,
+        anotacionesAnt,anotacionesPos,fichResumen,fotos FROM $tabla ORDER BY fechaRealizacion " . " LIMIT " . $empezarDesde . "," . $tamanioPagina;
 
         $resultado = $this->pdo->prepare($queryLimite);
         $resultado->execute();
@@ -129,5 +133,23 @@ class BD
         $resultado->execute(array());
     }
 
+    function borrarTarea($id)
+    {
+        $sql = "DELETE FROM tareas WHERE id='$id'";
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute(array());
+    }
 
+    function getTarea($id)
+    {
+        $stmt = $this->pdo->query("SELECT * FROM tareas WHERE id = $id");
+        return $stmt->fetch();
+    }
+
+    function modificarTarea($id) {
+        $stmt = $this->pdo->query("UPDATE tareas SET 'id' /*= '' aqui habra que poner 1 a 1 los nuevos valores o hacerlo con un foreach*/,'nif_cif','nombre','apellidos','telefono','textoDescripcion','correo','direccion','poblacion',
+        'codigoPostal','provincias','estado','fechaCreacion','operario_encargado','fechaRealizacion',
+        'anotacionesAnt','anotacionesPos', 'fichResumen','fotos' WHERE id = $id");
+        return $stmt->fetch();
+    }
 }

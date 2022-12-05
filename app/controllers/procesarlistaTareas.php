@@ -6,15 +6,19 @@
 
     //$listaTareas = Tarea::getListaTareas();
 
-    $nombreCampos = [
+    /*$nombreCampos = [
         'id','nif_cif','nombre','apellidos','telefono','textoDescripcion','correo','direccion','poblacion',
         'codigoPostal','provincias','estado','fechaCreacion','operario_encargado','fechaRealizacion',
         'anotacionesAnt','anotacionesPos', //'fichResumen','fotos'
+    ];*/
+
+    $nombreCampos = [
+        'id','nif_cif','nombre','textoDescripcion','estado','fechaCreacion','operario_encargado','fechaRealizacion',
     ];
 
-     // Preparar
+     // Preparar paginación
 
-     $tamanioPagina = 1;
+     $tamanioPagina = 3;
 
      if(isset($_GET['pagina'])){
 
@@ -46,6 +50,6 @@
     include('../views/listaTareas.php');
 
         for($i = 1; $i <= $totalPaginas; $i++){
-
+            
             echo "<a href='?pagina=" . $i . "'>" . $i . "</a> ";
         }
