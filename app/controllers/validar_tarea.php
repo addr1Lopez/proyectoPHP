@@ -12,6 +12,7 @@ include('../libraries/validarcif.php');
 include('../libraries/validaremail.php');
 include('../libraries/validarfecha.php');
 include('../libraries/validartelefono.php');
+include('../libraries/getValues.php');
 
 $hayError = FALSE;
 $errores = [];
@@ -79,7 +80,7 @@ if (!$_POST) { // Si no han enviado el formulario
     if ($hayError) {
         include("../views/formulario_tarea.php");
     } else {
-        include("../controllers/getvalues.php");
+        include("../controllers/validar_insertar.php");
     }
 }
 

@@ -4,14 +4,6 @@ include('../models/clasetarea.php');
 include('../models/bd.php');
 include('../libraries/creaTable.php');
 
-//$listaTareas = Tarea::getListaTareas();
-
-/*$nombreCampos = [
-        'id','nif_cif','nombre','apellidos','telefono','textoDescripcion','correo','direccion','poblacion',
-        'codigoPostal','provincias','estado','fechaCreacion','operario_encargado','fechaRealizacion',
-        'anotacionesAnt','anotacionesPos', //'fichResumen','fotos'
-    ];*/
-
 $nombreCampos = [
     'id', 'nif_cif', 'nombre', 'textoDescripcion', 'estado', 'fechaCreacion', 'operario_encargado', 'fechaRealizacion',
 ];
@@ -23,10 +15,8 @@ $tamanioPagina = 3;
 if (isset($_GET['pagina'])) {
 
     if ($_GET['pagina'] == 1) {
-
-        header('location:procesarListaTareas.php');
+        header('location:procesarTareasPendientes.php');
     } else {
-
         $pagina = $_GET['pagina'];
     }
 } else {
@@ -35,14 +25,13 @@ if (isset($_GET['pagina'])) {
 }
 
 $empezarDesde = ($pagina - 1) * $tamanioPagina;
-//echo "empezardesde: " . $empezarDesde . " pagina: " . $pagina . "<br>";
 
-$numFilas = Tarea::getNumeroTareas();
+$numFilas = Tarea::getNumeroTareasPendientes();
 $totalPaginas = ceil($numFilas / $tamanioPagina);
 
-$registro = Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina);
+$registro = Tarea::getTareasPendientesPorPagina($empezarDesde, $tamanioPagina);
 
-include('../views/listaTareas.php');
+include('../views/listaTareasPendientes.php');
 
 for ($i = 1; $i <= $totalPaginas; $i++) {
 

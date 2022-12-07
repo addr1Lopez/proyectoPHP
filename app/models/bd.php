@@ -51,7 +51,7 @@ class BD
         return $myArray;
     }
 
-    public function numFilas($tabla){
+    public function numFilas($tabla){ // Te cuenta el numero de filas de la tabla tareas
 
         $sql = "SELECT * FROM " . $tabla; 
 
@@ -63,9 +63,20 @@ class BD
         return $numFilas;
     }
 
-    public function resultadosPorPagina($tabla, $empezarDesde, $tamanioPagina){
 
-        //$queryLimite = "SELECT * FROM " . $tabla . " LIMIT " . $empezarDesde . "," . $tamanioPagina;
+    public function numFilasTareasPendientes($tabla){ // Te cuenta el numero de filas de la tabla tareas (donde las tareas sean pendientes)
+
+        $sql = "SELECT * FROM $tabla WHERE estado='P'"; 
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute();
+
+        $numFilas = $resultado->rowCount();
+
+        return $numFilas;
+    }
+
+    public function resultadosPorPagina($tabla, $empezarDesde, $tamanioPagina){ // Te recoge el listado de tareas
 
         $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,textoDescripcion,correo,direccion,poblacion,
         codigoPostal,provincias,estado,DATE_FORMAT(fechaCreacion, '%d/%m/%Y') AS fechaCreacion,operario_encargado, DATE_FORMAT(fechaRealizacion, '%d/%m/%Y') AS fechaRealizacion,
@@ -76,14 +87,20 @@ class BD
 
         //Almacenamos el resultado de fetchAll en una variable
         $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $datos;
+    }
 
-       /* while($registro = $resultado->fetch(PDO::FETCH_ASSOC)){
+    public function tareasPendientes($tabla, $empezarDesde, $tamanioPagina){ // Te recoge el listado de tareas pendientes
 
-            $lista = $registro["nombre"] . "<br>";
+        $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,textoDescripcion,correo,direccion,poblacion,
+        codigoPostal,provincias,estado,DATE_FORMAT(fechaCreacion, '%d/%m/%Y') AS fechaCreacion,operario_encargado, DATE_FORMAT(fechaRealizacion, '%d/%m/%Y') AS fechaRealizacion,
+        anotacionesAnt,anotacionesPos,fichResumen,fotos FROM $tabla WHERE estado='P' ORDER BY fechaRealizacion " . " LIMIT " . $empezarDesde . "," . $tamanioPagina;
 
-            }*/
+        $resultado = $this->pdo->prepare($queryLimite);
+        $resultado->execute();
 
-
+        //Almacenamos el resultado de fetchAll en una variable
+        $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $datos;
     }
     
@@ -146,10 +163,21 @@ class BD
         return $stmt->fetch();
     }
 
-    function modificarTarea($id) {
-        $stmt = $this->pdo->query("UPDATE tareas SET 'id' /*= '' aqui habra que poner 1 a 1 los nuevos valores o hacerlo con un foreach*/,'nif_cif','nombre','apellidos','telefono','textoDescripcion','correo','direccion','poblacion',
-        'codigoPostal','provincias','estado','fechaCreacion','operario_encargado','fechaRealizacion',
-        'anotacionesAnt','anotacionesPos', 'fichResumen','fotos' WHERE id = $id");
-        return $stmt->fetch();
+    function modificarTarea($id, $campos, $valores) {
+        $cadena = '';
+
+        $arrayValores = explode(",", $valores);
+
+        foreach ($campos as $valor => $contenido) {
+
+            $cadena .= $arrayValores[$valor] . " = '" .  $contenido . "' ,";
+        }
+
+        $cadena = substr($cadena, 0, -1);
+
+        $sql = "UPDATE tareas SET " . $cadena ." WHERE id = $id";
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute(array());
     }
 }
