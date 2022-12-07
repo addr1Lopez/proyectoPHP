@@ -1,0 +1,17 @@
+{
+    "name": "adri/proyecto",
+    "type": "project",
+    "require": {
+        "jenssegers/blade": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adri\\Proyecto\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Adri"
+        }
+    ]
+}

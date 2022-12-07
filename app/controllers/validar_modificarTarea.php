@@ -1,6 +1,6 @@
 <?php
 include('../controllers/utilsforms.php');
-include('../controllers/creaselect.php');
+include('../controllers/varios.php');
 
 include('../models/bd.php');
 include('../models/claseprovincia.php');
@@ -14,6 +14,7 @@ include('../libraries/validaremail.php');
 include('../libraries/validarfecha.php');
 include('../libraries/validartelefono.php');
 include('../libraries/getValues.php');
+include('../libraries/creaselect.php');
 
 $hayError = FALSE;
 $errores = [];
@@ -27,7 +28,8 @@ if (!$_POST) { // Si no han enviado el formulario
 
     $datosTarea = Tarea::getDatosTarea($id);
 
-    include("../views/formulario_modificarTarea.php");
+    echo $blade->render('formulario_modificarTarea', ['datosTarea' => $datosTarea], ['id' => $id]);
+
 } else {
 
     /* Validar nombre */
@@ -78,13 +80,14 @@ if (!$_POST) { // Si no han enviado el formulario
 
     /* Validar fecha de realizacion */
     $fechaRealizacion = $_POST['fechaRealizacion'];
-    if (empty($fechaRealizacion) /*|| !validarFechaRealizacion($fechaRealizacion)*/) {
+    if (empty($fechaRealizacion) || !validarFechaRealizacion($fechaRealizacion)) {
         $errores['fechaRealizacion'] = 'La fecha de realización está vacía o no es válida';
         $hayError = TRUE;
     }
 
     if ($hayError) {
-        include("../views/formulario_modificarTarea.php");
+        $id = $_GET['id'];
+        echo $blade->render('formulario_modificarTarea', ['id' => $id]);
     } else {
         $id = $_GET['id'];
           

@@ -3,6 +3,7 @@
 include('../models/clasetarea.php');
 include('../models/bd.php');
 include('../libraries/creaTable.php');
+include('../controllers/varios.php');
 
 //$listaTareas = Tarea::getListaTareas();
 
@@ -17,34 +18,39 @@ $nombreCampos = [
 ];
 
 // Preparar paginación
+$tamanioPagina = 5;
 
-$tamanioPagina = 3;
 
 if (isset($_GET['pagina'])) {
-
+    
     if ($_GET['pagina'] == 1) {
-
         header('location:procesarListaTareas.php');
     } else {
-
         $pagina = $_GET['pagina'];
     }
 } else {
-
     $pagina = 1;
 }
 
 $empezarDesde = ($pagina - 1) * $tamanioPagina;
-//echo "empezardesde: " . $empezarDesde . " pagina: " . $pagina . "<br>";
 
 $numFilas = Tarea::getNumeroTareas();
 $totalPaginas = ceil($numFilas / $tamanioPagina);
 
 $registro = Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina);
 
-include('../views/listaTareas.php');
+echo $blade->render('listaTareas', [
+    'tareas' => Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina),
+    'nombreCampos' => $nombreCampos,
+    'empezarDesde' => $empezarDesde,
+    'tamanioPagina' => $tamanioPagina,
+    'pagina' => $pagina,
+    'totalPaginas' => $totalPaginas
+    
+]);
 
 for ($i = 1; $i <= $totalPaginas; $i++) {
-
+    
     echo "<a href='?pagina=" . $i . "'>" . $i . "</a> ";
 }
+

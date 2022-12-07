@@ -11,6 +11,8 @@
 </head>
 
 <body>
+@extends('_template')
+    @section('cuerpo')
     <h2>Formulario de modificación de la tarea <?=$id?> </h2>
     <form action="../controllers/validar_modificarTarea.php?id=<?=$id?>" method='post'>
         <label id="nif_cif">NIF o CIF:</label> <input type="text" class="form-control" name="nif_cif" value="<?= isset($datosTarea["nif_cif"]) ? $datosTarea["nif_cif"] : ValorPost('nif_cif') ?>">
@@ -89,6 +91,7 @@
         <button type="submit" class="btn btn-primary mb-3" name="">Enviar</button>
 
     </form>
+    @endsection
 </body>
 
 </html>

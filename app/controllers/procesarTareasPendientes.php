@@ -3,6 +3,7 @@
 include('../models/clasetarea.php');
 include('../models/bd.php');
 include('../libraries/creaTable.php');
+include('../controllers/varios.php');
 
 $nombreCampos = [
     'id', 'nif_cif', 'nombre', 'textoDescripcion', 'estado', 'fechaCreacion', 'operario_encargado', 'fechaRealizacion',
@@ -31,7 +32,15 @@ $totalPaginas = ceil($numFilas / $tamanioPagina);
 
 $registro = Tarea::getTareasPendientesPorPagina($empezarDesde, $tamanioPagina);
 
-include('../views/listaTareasPendientes.php');
+echo $blade->render('listaTareas', [
+    'tareas' => Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina),
+    'nombreCampos' => $nombreCampos,
+    'empezarDesde' => $empezarDesde,
+    'tamanioPagina' => $tamanioPagina,
+    'pagina' => $pagina,
+    'totalPaginas' => $totalPaginas
+    
+]);
 
 for ($i = 1; $i <= $totalPaginas; $i++) {
 

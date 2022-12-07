@@ -9,7 +9,7 @@
     <link href="../../Assets/css/login.css" rel="stylesheet">
 </head>
 <body>
-    <form action="../controllers/validar_usuario.php" method="post">
+    <form action="/app/controllers/validar_usuario.php" method="post">
     <h1>Inicio de sesión</h1>
     <br>
     <label>Correo:</label><input class="form-control" type="text" name="correo">
@@ -22,4 +22,4 @@
     </form>
     
 </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\PHP\Proyecto\app\views/login.blade.php ENDPATH**/ ?>

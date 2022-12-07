@@ -7,8 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>¿Estás seguro de que quieres borrar la tarea <?= $_GET['id'] ?> ?</h2>
-    <a href="../controllers/controladorBorrar.php?id=<?= $_GET['id'] ?>">Si</a>
-    <a href="../controllers/procesarlistaTareas.php">No</a>
+@extends('_template')
+
+@section('cuerpo')
+
+@endsection
 </body>
 </html>

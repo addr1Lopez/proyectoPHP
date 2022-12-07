@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    
+    <?php $__env->startSection('cuerpo'); ?>
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -59,3 +61,8 @@
         </tbody>
     </table>
     <a href="../controllers/procesarlistaTareas.php">Volver a lista de tareas</a>
+    <?php $__env->stopSection(); ?>
+    
+</body>
+</html>
+<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\PHP\Proyecto\app\views/verDetalles.blade.php ENDPATH**/ ?>
