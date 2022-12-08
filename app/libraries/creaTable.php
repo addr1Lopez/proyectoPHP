@@ -23,10 +23,10 @@ function creaTable($name, $nombreCampos, $listaValores)
 
         endforeach;
 
-        $html .= '<td class="boton"><a href="../controllers/controladorBorrar.php?id=' . $valor['id'] . '">BORRAR</a></td>
-            <td class="boton"><a href="../controllers/validar_ModificarTarea.php?id=' . $valor['id'] . '">MODIFICAR</a></td>
-            <td class="boton"><a href="">COMPLETAR</a></td>
-            <td class="boton"><a href="../controllers/procesarVerDetalles.php?id=' . $valor['id'] . '">VER DETALLES</a></td></tr>';
+        $html .= '<td class="boton"><a class="btn btn-danger" href="../controllers/controladorBorrar.php?id=' . $valor['id'] . '">BORRAR</a></td>
+            <td class="boton"><a class="btn btn-warning" href="../controllers/validar_ModificarTarea.php?id=' . $valor['id'] . '">MODIFICAR</a></td>
+            <td class="boton"><a class="btn btn-success" href="../controllers/validar_completarTarea.php?id=' . $valor['id'] . '">COMPLETAR</a></td>
+            <td class="boton"><a class="btn btn-info" href="../controllers/procesarVerDetalles.php?id=' . $valor['id'] . '">VER DETALLES</a></td></tr>';
 
     endforeach;
 

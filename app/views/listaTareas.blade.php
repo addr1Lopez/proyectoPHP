@@ -15,8 +15,27 @@
     @section('cuerpo')
 
     <?= creaTable('listaTareas', $nombreCampos, Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina)) ?>
-    
-    @endsection
+
+
+    <a href="?pagina=1" class="btn btn-primary" role='button'>Primera</a>
+
+    <a href="?pagina=<?= ($pagina == 1) ? $pagina : $pagina - 1 ?>" class="btn btn-primary" role='button'><<</a>
+
+            <span>Página <?= $pagina ?></span>
+
+            <a href="?pagina=<?= ($pagina == $totalPaginas) ? $pagina : $pagina + 1 ?>" class="btn btn-primary" role='button'>>></a>
+
+            <a href="?pagina=<?= $totalPaginas ?>" class="btn btn-primary" role='button'>Última</a>
+
+            <span>Páginas: <?= $totalPaginas ?></span>
+            <br><br>
+
+            <form action="../controllers/procesarListaTareasPendientes.php" method="get">
+                <input type="text" name="numPag">
+                <button>Ir a página</button>
+            </form>
+            <br>
+            @endsection
 </body>
 
 </html>

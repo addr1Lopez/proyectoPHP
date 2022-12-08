@@ -14,7 +14,7 @@ include('../controllers/varios.php');
     ];*/
 
 $nombreCampos = [
-    'id', 'nif_cif', 'nombre', 'textoDescripcion', 'estado', 'fechaCreacion', 'operario_encargado', 'fechaRealizacion',
+    'id', 'nif_cif', 'nombre', 'textoDescripcion', 'poblacion', 'estado', 'fechaCreacion', 'operario_encargado', 'fechaRealizacion',
 ];
 
 // Preparar paginación
@@ -22,7 +22,7 @@ $tamanioPagina = 5;
 
 
 if (isset($_GET['pagina'])) {
-    
+
     if ($_GET['pagina'] == 1) {
         header('location:procesarListaTareas.php');
     } else {
@@ -32,10 +32,21 @@ if (isset($_GET['pagina'])) {
     $pagina = 1;
 }
 
-$empezarDesde = ($pagina - 1) * $tamanioPagina;
 
 $numFilas = Tarea::getNumeroTareas();
 $totalPaginas = ceil($numFilas / $tamanioPagina);
+$empezarDesde = ($pagina - 1) * $tamanioPagina;
+
+
+/**
+ * Comprobar si se ha enviado el valor de la página por el buscador
+ */
+if (isset($_GET['numPag'])) {
+    
+    if ($_GET['numPag'] > 0 && $_GET['numPag'] <= $totalPaginas) {
+        $pagina = $_GET['numPag'];
+    }
+}
 
 $registro = Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina);
 
@@ -46,11 +57,5 @@ echo $blade->render('listaTareas', [
     'tamanioPagina' => $tamanioPagina,
     'pagina' => $pagina,
     'totalPaginas' => $totalPaginas
-    
+
 ]);
-
-for ($i = 1; $i <= $totalPaginas; $i++) {
-    
-    echo "<a href='?pagina=" . $i . "'>" . $i . "</a> ";
-}
-

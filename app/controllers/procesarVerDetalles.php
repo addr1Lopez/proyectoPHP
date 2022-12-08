@@ -9,4 +9,5 @@ $id = $_GET["id"];
 
 $datosTarea = Tarea::getDatosTarea($id);
 
-echo $blade->render('verDetalles', ['datosTarea' => $datosTarea]);
+echo $blade->render('verDetalles', ['datosTarea' => $datosTarea,
+'id' => $id]);

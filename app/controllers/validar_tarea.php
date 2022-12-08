@@ -16,7 +16,6 @@ include('../libraries/creaselect.php');
 
 $hayError = FALSE;
 $errores = [];
-$fcha = date("Y-m-d"); // Habra que quitarlo porque lo de la fecha de creación hay que ponerlo con un trigger
 
 $conexion = BD::getInstance();
 

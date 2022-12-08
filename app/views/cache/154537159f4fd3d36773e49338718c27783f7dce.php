@@ -12,6 +12,8 @@
 <body>
     
     <?php $__env->startSection('cuerpo'); ?>
+    <br>
+    <h2>Detalles de la tarea <?=$id?> </h2>
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -55,12 +57,14 @@
                 <td><?= $datosTarea['fechaRealizacion'] ?></td>
                 <td><?= $datosTarea['anotacionesAnt'] ?></td>
                 <td><?= $datosTarea['anotacionesPos'] ?></td>
-                <td><?= $datosTarea['fichResumen'] ?></td>
-                <td><?= $datosTarea['fotos'] ?></td>
+                <td><?= ($datosTarea['fichResumen'] != "") ? "<a class='btn btn-info' href='/Files/" . $datosTarea['fichResumen'] . "' download='" . $datosTarea['fichResumen'] . "'>Descargar</a>" : "" ?> </td>
+                <td><?= ($datosTarea['fotos'] != "") ? "<a class='btn btn-info' href='/Files/" . $datosTarea['fotos'] . "' download='" . $datosTarea['fotos'] . "'>Descargar</a>" : "" ?> </td>
             </tr>
         </tbody>
     </table>
-    <a href="../controllers/procesarlistaTareas.php">Volver a lista de tareas</a>
+    <a class="btn btn-danger" href="../controllers/procesarlistaTareas.php">Volver atrás</a>
+    <br>
+    <br>
     <?php $__env->stopSection(); ?>
     
 </body>

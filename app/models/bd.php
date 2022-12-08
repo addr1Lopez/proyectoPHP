@@ -51,22 +51,10 @@ class BD
         return $myArray;
     }
 
-    public function numFilas($tabla){ // Te cuenta el numero de filas de la tabla tareas
+    public function numFilas($tabla)
+    { // Te cuenta el numero de filas de la tabla tareas
 
-        $sql = "SELECT * FROM " . $tabla; 
-
-        $resultado = $this->pdo->prepare($sql);
-        $resultado->execute();
-
-        $numFilas = $resultado->rowCount();
-
-        return $numFilas;
-    }
-
-
-    public function numFilasTareasPendientes($tabla){ // Te cuenta el numero de filas de la tabla tareas (donde las tareas sean pendientes)
-
-        $sql = "SELECT * FROM $tabla WHERE estado='P'"; 
+        $sql = "SELECT * FROM " . $tabla;
 
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute();
@@ -76,7 +64,22 @@ class BD
         return $numFilas;
     }
 
-    public function resultadosPorPagina($tabla, $empezarDesde, $tamanioPagina){ // Te recoge el listado de tareas
+
+    public function numFilasTareasPendientes($tabla)
+    { // Te cuenta el numero de filas de la tabla tareas (donde las tareas sean pendientes)
+
+        $sql = "SELECT * FROM $tabla WHERE estado='P'";
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute();
+
+        $numFilas = $resultado->rowCount();
+
+        return $numFilas;
+    }
+
+    public function resultadosPorPagina($tabla, $empezarDesde, $tamanioPagina)
+    { // Te recoge el listado de tareas
 
         $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,textoDescripcion,correo,direccion,poblacion,
         codigoPostal,provincias,estado,DATE_FORMAT(fechaCreacion, '%d/%m/%Y') AS fechaCreacion,operario_encargado, DATE_FORMAT(fechaRealizacion, '%d/%m/%Y') AS fechaRealizacion,
@@ -90,7 +93,8 @@ class BD
         return $datos;
     }
 
-    public function tareasPendientes($tabla, $empezarDesde, $tamanioPagina){ // Te recoge el listado de tareas pendientes
+    public function tareasPendientes($tabla, $empezarDesde, $tamanioPagina)
+    { // Te recoge el listado de tareas pendientes
 
         $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,textoDescripcion,correo,direccion,poblacion,
         codigoPostal,provincias,estado,DATE_FORMAT(fechaCreacion, '%d/%m/%Y') AS fechaCreacion,operario_encargado, DATE_FORMAT(fechaRealizacion, '%d/%m/%Y') AS fechaRealizacion,
@@ -103,7 +107,7 @@ class BD
         $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $datos;
     }
-    
+
     /*Realiza la conexión a la base de datos.*/
     public function conectar()
     {
@@ -163,10 +167,13 @@ class BD
         return $stmt->fetch();
     }
 
-    function modificarTarea($id, $campos, $valores) {
+    function modificarTarea($id, $campos, $valores)
+    {
+        //var_dump($campos);
         $cadena = '';
-
+        
         $arrayValores = explode(",", $valores);
+        //var_dump($arrayValores);
 
         foreach ($campos as $valor => $contenido) {
 
@@ -175,7 +182,7 @@ class BD
 
         $cadena = substr($cadena, 0, -1);
 
-        $sql = "UPDATE tareas SET " . $cadena ." WHERE id = $id";
+        $sql = "UPDATE tareas SET " . $cadena . " WHERE id = $id";
 
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute(array());

@@ -1,7 +1,6 @@
 <?php
 function getValues($recogida_campos, $value)
 {
-    $recogida_campos = $_POST;
     $nombre_campos = "";
     $valores = "";
 
