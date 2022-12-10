@@ -128,6 +128,13 @@ class BD
         return $stmt->fetch();
     }
 
+    function getUsuario($correo, $contraseña)
+    {
+        $stmt = $this->pdo->query("SELECT * FROM usuarios WHERE correo='$correo' AND contraseña='$contraseña'");
+        return $stmt->fetch();
+    }
+
+
     function getListaSelect($tabla, $c_idx, $c_value, $condicion = "")
     {
         $this->stmt = $this->pdo->prepare('SELECT ' . $c_idx . ',' . $c_value . ' FROM ' . $tabla . " " . $condicion);
@@ -169,11 +176,9 @@ class BD
 
     function modificarTarea($id, $campos, $valores)
     {
-        //var_dump($campos);
         $cadena = '';
         
         $arrayValores = explode(",", $valores);
-        //var_dump($arrayValores);
 
         foreach ($campos as $valor => $contenido) {
 

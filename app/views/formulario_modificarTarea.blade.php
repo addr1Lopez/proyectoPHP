@@ -79,14 +79,17 @@
         <label>Anotaciones anteriores:</label> <br> <textarea class="form-control" name="anotacionesAnt" id="anotaAnt" cols="30" rows="4"><?= isset($datosTarea["anotacionesAnt"]) ? $datosTarea["anotacionesAnt"] : ValorPost('anotacionesAnt') ?></textarea>
         <br>
 
-        <label>Anotaciones posteriores:</label> <br> <textarea class="form-control" name="anotacionesPos" id="anotaPos" cols="30" rows="4"><?= isset($datosTarea["anotacionesPos"]) ? $datosTarea["anotacionesPos"] : ValorPost('anotacionesAnt') ?></textarea>
+        <label>Anotaciones posteriores:</label> <br> <textarea class="form-control" name="anotacionesPos" id="anotaPos" cols="30" rows="4"><?= isset($datosTarea["anotacionesPos"]) ? $datosTarea["anotacionesPos"] : ValorPost('anotacionesPos') ?></textarea>
         <br>
 
         <label>Fichero resumen:</label> <input type="file" class="form-control" name="fichResumen"><br>
 
         <label>Fotos del trabajo realizado:</label> <input type="file" class="form-control" name="fotos"><br>
 
-        <button type="submit" class="btn btn-primary mb-3" name="">Enviar</button>
+        <div>
+            <button type="submit" class="btn btn-primary mb-3" name="">Enviar</button>
+            <a style="margin-bottom: 16px" class="btn btn-danger" href="../controllers/procesarlistaTareas.php">Volver atrás <i class="fa-solid fa-backward"></i></a>
+        </div>
 
     </form>
     @endsection

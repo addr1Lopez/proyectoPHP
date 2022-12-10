@@ -5,6 +5,8 @@ include("../models/bd.php");
 include("../libraries/creaTable.php");
 include('../controllers/varios.php');
 
+session_start();
+
 $id = $_GET["id"];
 
 $datosTarea = Tarea::getDatosTarea($id);

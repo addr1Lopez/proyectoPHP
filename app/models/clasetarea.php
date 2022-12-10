@@ -26,6 +26,11 @@ class Tarea
         return BD::getInstance()->modificarTarea($id, $nombre_campos, $valores);
     }
 
+    /*static function completar($id, $nombre_campos, $valores)
+    {
+        return BD::getInstance()->completarTarea($id, $nombre_campos, $valores);
+    }*/
+
     static function getNumeroTareas()
     {
         return BD::getInstance()->numFilas('tareas');

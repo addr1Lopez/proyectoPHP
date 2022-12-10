@@ -17,6 +17,7 @@ include('../libraries/getValues.php');
 include('../libraries/creaselect.php');
 include('../libraries/subirArchivos.php');
 
+session_start();
 
 $hayError = FALSE;
 $errores = [];

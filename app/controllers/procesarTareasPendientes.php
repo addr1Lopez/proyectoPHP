@@ -5,8 +5,14 @@ include('../models/bd.php');
 include('../libraries/creaTable.php');
 include('../controllers/varios.php');
 
+session_start();
+
 $nombreCampos = [
     'id', 'nif_cif', 'nombre', 'textoDescripcion', 'poblacion', 'estado', 'fechaCreacion', 'operario_encargado', 'fechaRealizacion',
+];
+
+$nombresFormateados = [
+    'ID', 'NIF/CIF', 'NOMBRE', 'DESCRIPCIÓN', 'POBLACIÓN', 'ESTADO', 'FECHA DE CREACIÓN', 'OPERARIO', 'FECHA DE REALIZACIÓN',
 ];
 
 // Preparar paginación
@@ -33,18 +39,20 @@ $totalPaginas = ceil($numFilas / $tamanioPagina);
 /**
  * Comprobar si se ha enviado el valor de la página por el buscador
  */
+/*
 if (isset($_GET['numPag'])) {
     
     if ($_GET['numPag'] > 0 && $_GET['numPag'] <= $totalPaginas) {
         $pagina = $_GET['numPag'];
     }
 }
-
+*/
 $registro = Tarea::getTareasPendientesPorPagina($empezarDesde, $tamanioPagina);
 
 echo $blade->render('listaTareasPendientes', [
     'tareas' => Tarea::getTareasPendientesPorPagina($empezarDesde, $tamanioPagina),
     'nombreCampos' => $nombreCampos,
+    'nombresFormateados' => $nombresFormateados,
     'empezarDesde' => $empezarDesde,
     'tamanioPagina' => $tamanioPagina,
     'pagina' => $pagina,

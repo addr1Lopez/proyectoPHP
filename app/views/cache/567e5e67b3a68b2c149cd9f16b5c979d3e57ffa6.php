@@ -14,30 +14,28 @@
     
     <?php $__env->startSection('cuerpo'); ?>
 
-    <?= creaTable('listaTareasPendientes', $nombreCampos, Tarea::getTareasPendientesPorPagina($empezarDesde, $tamanioPagina)) ?>
+    <?= creaTable('listaTareasPendientes', $nombreCampos, $nombresFormateados, Tarea::getTareasPendientesPorPagina($empezarDesde, $tamanioPagina)) ?>
 
 
-    <a href="?pagina=1" class='btn btn-info' role='button'>Primera</a>
+    <a href="?pagina=1" class='btn btn-primary' role='button' style="font-weight: bold"><i class="fa-sharp fa-solid fa-backward-fast"></i></a>
 
-    <a href="?pagina=<?= ($pagina == 1) ? $pagina : $pagina - 1 ?>" class='btn btn-info' role='button'>
-        << </a>
+    <a href="?pagina=<?= ($pagina == 1) ? $pagina : $pagina - 1 ?>" class='btn btn-primary' role='button' style="font-weight: bold"><i class="fa-solid fa-backward-step"></i></a>
 
-            <span>Página <?= $pagina ?></span>
+    <span>Página <?= $pagina ?></span>
 
-            <a href="?pagina=<?= ($pagina == $totalPaginas) ? $pagina : $pagina + 1 ?>" class='btn btn-info' role='button'>>></a>
+    <a href="?pagina=<?= ($pagina == $totalPaginas) ? $pagina : $pagina + 1 ?>" class='btn btn-primary' role='button' style="font-weight: bold"><i class="fa-solid fa-forward-step"></i></a>
 
-            <a href="?pagina=<?= $totalPaginas ?>" class='btn btn-info' role='button'>Última</a>
+    <a href="?pagina=<?= $totalPaginas ?>" class='btn btn-primary' role='button' style="font-weight: bold"><i class="fa-sharp fa-solid fa-forward-fast"></i></a>
 
-            <span>Nº páginas: <?= $totalPaginas ?></span>
-            <br><br>
+    <span>Nº de Páginas: <?= $totalPaginas ?></span>
+    <br><br>
 
-            <form action="../controllers/procesarTareasPendientes.php" method="get">
-                <input type="text" name="numPag">
-                <button>Ir a página</button>
-            </form>
-
-
-            <?php $__env->stopSection(); ?>
+    <form action="../controllers/procesarTareasPendientes.php" method="get" style="display: flex; flex-direction:row;">
+        <button style="margin-bottom: 1rem; background-color:dodgerblue; color:white; font-weight: bold" class="btn btn-dark">Ir a Página:</button>
+        &nbsp;
+        <input type="text" name="pagina" style="margin-bottom: 1rem">
+    </form>
+    <?php $__env->stopSection(); ?>
 </body>
 
 </html>
