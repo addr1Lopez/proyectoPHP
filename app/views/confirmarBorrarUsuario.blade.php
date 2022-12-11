@@ -14,9 +14,9 @@
     @extends('_template')
     @section('cuerpo')
     <br>
-    <h2>¿Estás seguro de que quieres borrar la tarea <?= $_GET['id'] ?> ?</h2>
-    <a class="btn btn-success" href="../controllers/procesarBorrar.php?id=<?= $_GET['id'] ?>">SI</a>
-    <a class="btn btn-danger" href="../controllers/procesarlistaTareas.php">NO</a>
+    <h2>¿Estás seguro de que quieres borrar el usuario con NIF = <?= $_GET['nif'] ?> ?</h2>
+    <a class="btn btn-success" href="../controllers/procesarBorrarUsuario.php?nif=<?= $_GET['nif'] ?>">SI</a>
+    <a class="btn btn-danger" href="../controllers/procesarlistaUsuarios.php">NO</a>
     <br><br>
     @endsection
 </body>

@@ -26,6 +26,7 @@ if (!$_POST) {
         $fechaHora = date('H:i:s');
         $_SESSION['nombre'] = $usuario['nombre'];
         $_SESSION['fecha'] = $fechaHora;
+        $_SESSION['nif'] = $usuario['nif'];
 
         if ($usuario['esAdmin'] == 1) {
             $_SESSION['rol'] = "Administrador";

@@ -74,16 +74,7 @@
         <label>Fecha de realización:</label> <input type="date" class="form-control" name="fechaRealizacion" value="<?= ValorPost('fechaRealizacion') ?>">
         <?= VerError('fechaRealizacion') ?>
         <br>
-
-        <!--<label>Anotaciones anteriores:</label> <br> <textarea class="form-control" name="anotacionesAnt" id="anotaAnt" cols="30" rows="4"></textarea>-->
-
-        <!--<label>Anotaciones posteriores:</label> <br> <textarea class="form-control" name="anotacionesPos" id="anotaPos" cols="30" rows="4"></textarea>-->
-        
-        <!-- <label>Fichero resumen:</label> <input type="file" class="form-control" name=""><br> -->
-
-        <!-- <label>Fotos del trabajo realizado:</label> <input type="file" class="form-control" name=""><br> -->
-
-        <button type="submit" class="btn btn-primary mb-3" name="">Enviar</button>
+        <button type="submit" class="btn btn-primary mb-3" name="">Añadir</button>
 
     </form>
     <?php $__env->stopSection(); ?>

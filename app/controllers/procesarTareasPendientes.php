@@ -36,17 +36,6 @@ $empezarDesde = ($pagina - 1) * $tamanioPagina;
 $numFilas = Tarea::getNumeroTareasPendientes();
 $totalPaginas = ceil($numFilas / $tamanioPagina);
 
-/**
- * Comprobar si se ha enviado el valor de la página por el buscador
- */
-/*
-if (isset($_GET['numPag'])) {
-    
-    if ($_GET['numPag'] > 0 && $_GET['numPag'] <= $totalPaginas) {
-        $pagina = $_GET['numPag'];
-    }
-}
-*/
 $registro = Tarea::getTareasPendientesPorPagina($empezarDesde, $tamanioPagina);
 
 echo $blade->render('listaTareasPendientes', [

@@ -14,12 +14,12 @@
     
     <?php $__env->startSection('cuerpo'); ?>
     <br>
-    <h2>¿Estás seguro de que quieres borrar la tarea <?= $_GET['id'] ?> ?</h2>
-    <a class="btn btn-success" href="../controllers/procesarBorrar.php?id=<?= $_GET['id'] ?>">SI</a>
-    <a class="btn btn-danger" href="../controllers/procesarlistaTareas.php">NO</a>
+    <h2>¿Estás seguro de que quieres borrar el usuario con NIF = <?= $_GET['nif'] ?> ?</h2>
+    <a class="btn btn-success" href="../controllers/procesarBorrarUsuario.php?nif=<?= $_GET['nif'] ?>">SI</a>
+    <a class="btn btn-danger" href="../controllers/procesarlistaUsuarios.php">NO</a>
     <br><br>
     <?php $__env->stopSection(); ?>
 </body>
 
 </html>
-<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\PHP\Proyecto\app\views/confirmacion_borrar.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\PHP\Proyecto\app\views/confirmarBorrarUsuario.blade.php ENDPATH**/ ?>

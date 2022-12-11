@@ -93,6 +93,18 @@ class BD
         return $datos;
     }
 
+    public function usuariosPorPagina($tabla, $empezarDesde, $tamanioPagina)
+    { // Te recoge el listado de usuarios
+
+        $queryLimite = "SELECT * FROM $tabla " . " LIMIT " . $empezarDesde . "," . $tamanioPagina;
+        $resultado = $this->pdo->prepare($queryLimite);
+        $resultado->execute();
+
+        //Almacenamos el resultado de fetchAll en una variable
+        $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $datos;
+    }
+
     public function tareasPendientes($tabla, $empezarDesde, $tamanioPagina)
     { // Te recoge el listado de tareas pendientes
 
@@ -134,6 +146,38 @@ class BD
         return $stmt->fetch();
     }
 
+    function getUsuarioPorNIF($nif)
+    {
+        $stmt = $this->pdo->query("SELECT * FROM usuarios WHERE nif = '$nif'");
+        return $stmt->fetch();
+    }
+
+    function borrarUsuario($nif)
+    {
+        $sql = "DELETE FROM usuarios WHERE nif='$nif'";
+        echo $sql;
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute(array());
+    }
+
+    function modificarUsuario($nif, $campos, $valores)
+    {
+        $cadena = '';
+        
+        $arrayValores = explode(",", $valores);
+
+        foreach ($campos as $valor => $contenido) {
+
+            $cadena .= $arrayValores[$valor] . " = '" .  $contenido . "' ,";
+        }
+
+        $cadena = substr($cadena, 0, -1);
+
+        $sql = "UPDATE usuarios SET " . $cadena . " WHERE nif = '$nif'";
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute(array());
+    }
 
     function getListaSelect($tabla, $c_idx, $c_value, $condicion = "")
     {
@@ -173,7 +217,7 @@ class BD
         $stmt = $this->pdo->query("SELECT * FROM tareas WHERE id = $id");
         return $stmt->fetch();
     }
-
+    
     function modificarTarea($id, $campos, $valores)
     {
         $cadena = '';

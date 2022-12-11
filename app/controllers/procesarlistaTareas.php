@@ -50,6 +50,7 @@ if (isset($_GET['numPag'])) {
 */
 $registro = Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina);
 
+
 echo $blade->render('listaTareas', [
     'tareas' => Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina),
     'nombreCampos' => $nombreCampos,

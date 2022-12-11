@@ -14,7 +14,7 @@
     
     <?php $__env->startSection('cuerpo'); ?>
 
-    <?= creaTable('listaTareasPendientes', $nombreCampos, $nombresFormateados, Tarea::getTareasPendientesPorPagina($empezarDesde, $tamanioPagina)) ?>
+    <?= creaTable('listaTareasPendientes', $nombreCampos, $nombresFormateados, Tarea::getTareasPendientesPorPagina($empezarDesde, $tamanioPagina), 'id') ?>
 
 
     <a href="?pagina=1" class='btn btn-primary' role='button' style="font-weight: bold"><i class="fa-sharp fa-solid fa-backward-fast"></i></a>

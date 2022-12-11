@@ -56,7 +56,6 @@
 
         <label>Estado:</label>
         <select class="form-select" name="estado" id="estado">
-            <option value="0">--- Seleccione un estado de tarea ---</option>
             <option value="B" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'B' ? 'selected' : '' ?>>B - Esperando ser aprobada</option>
             <option value="P" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'P' ? 'selected' : '' ?>>P - Pendiente</option>
             <option value="R" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'R' ? 'selected' : '' ?>>R - Realizada</option>
@@ -87,8 +86,11 @@
         <label>Fotos del trabajo realizado:</label> <input type="file" class="form-control" name="fotos"><br>
 
         <div>
-            <button type="submit" class="btn btn-primary mb-3" name="">Enviar</button>
-            <a style="margin-bottom: 16px" class="btn btn-danger" href="../controllers/procesarlistaTareas.php">Volver atrás <i class="fa-solid fa-backward"></i></a>
+            <button type="submit" class="btn btn-primary mb-3" name="">Modificar</button>
+            <br>
+            <a style="margin-bottom: 16px" class="btn btn-danger" href="../controllers/procesarlistaTareas.php">Volver a tareas <i class="fa-solid fa-backward"></i></a>
+            <a style="margin-bottom: 16px" class="btn btn-danger" href="../controllers/procesarTareasPendientes.php">Volver a tareas pendientes <i class="fa-solid fa-backward"></i></a>
+
         </div>
 
     </form>

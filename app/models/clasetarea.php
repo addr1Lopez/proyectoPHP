@@ -5,12 +5,6 @@ class Tarea
     {
     }
 
-    /**
-     * Devuelve la lista de provincias para crear un select cod->nombre
-     */
-
-    //el static no funciona.
-
     static function insertar($nombre_campos, $valores)
     {
         return BD::getInstance()->insertarValores('tareas', $nombre_campos, $valores);
@@ -25,11 +19,6 @@ class Tarea
     {
         return BD::getInstance()->modificarTarea($id, $nombre_campos, $valores);
     }
-
-    /*static function completar($id, $nombre_campos, $valores)
-    {
-        return BD::getInstance()->completarTarea($id, $nombre_campos, $valores);
-    }*/
 
     static function getNumeroTareas()
     {

@@ -14,7 +14,7 @@
     @extends('_template')
     @section('cuerpo')
 
-    <?= creaTable('listaTareas', $nombreCampos, $nombresFormateados, Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina)) ?>
+    <?= creaTable('listaTareas', $nombreCampos, $nombresFormateados, Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina), 'id') ?>
 
 
     <a href="?pagina=1" class='btn btn-primary' role='button' style="font-weight: bold"><i class="fa-solid fa-backward-fast"></i></a>

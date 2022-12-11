@@ -11,10 +11,10 @@
 </head>
 
 <body>
-    
-    <?php $__env->startSection('cuerpo'); ?>
+    @extends('_template')
+    @section('cuerpo')
 
-    <?= creaTable('listaTareas', $nombreCampos, $nombresFormateados, Tarea::getTareasPorPagina($empezarDesde, $tamanioPagina), 'id') ?>
+    <?= creaTable('listaUsuarios', $nombreCampos, $nombresFormateados, Usuario::getUsuariosPorPagina($empezarDesde, $tamanioPagina), 'nif') ?>
 
 
     <a href="?pagina=1" class='btn btn-primary' role='button' style="font-weight: bold"><i class="fa-solid fa-backward-fast"></i></a>
@@ -30,13 +30,12 @@
     <span> Nº de Páginas: <?= $totalPaginas ?></span>
     <br><br>
 
-    <form action="../controllers/procesarListaTareas.php" method="get" style="display: flex; flex-direction:row;">
+    <form action="../controllers/procesarListaUsuarios.php" method="get" style="display: flex; flex-direction:row;">
         <button style="margin-bottom: 1rem; background-color:dodgerblue; color:white; font-weight: bold" class="btn btn-dark">Ir a Página:</button>
         &nbsp;
         <input type="text" name="pagina" style="margin-bottom: 1rem">
     </form>
-    <?php $__env->stopSection(); ?>
+    @endsection
 </body>
 
 </html>
-<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\PHP\Proyecto\app\views/listaTareas.blade.php ENDPATH**/ ?>
