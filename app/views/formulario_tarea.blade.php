@@ -13,6 +13,7 @@
 <body>
     @extends('_template')
     @section('cuerpo')
+    <br>
     <h2>Formulario de recogida de información de la tarea</h2>
     <form action="../controllers/validar_tarea.php" method="post">
         <label id="nif_cif">NIF o CIF:</label> <input type="text" class="form-control" name="nif_cif" value="<?= ValorPost('nif_cif') ?>">
@@ -33,7 +34,7 @@
         <?= VerError('telefono') ?>
         <br>
 
-        <label>Descripción:</label> <br> <textarea name="textoDescripcion" class="form-control" id="descripcion" cols="30" rows="4"><?= ValorPost('textoDescripcion') ?></textarea>
+        <label>Descripción:</label> <textarea name="textoDescripcion" class="form-control" id="descripcion" cols="30" rows="4"><?= ValorPost('textoDescripcion') ?></textarea>
         <?= VerError('textoDescripcion') ?>
         <br>
 
@@ -73,8 +74,10 @@
         <label>Fecha de realización:</label> <input type="date" class="form-control" name="fechaRealizacion" value="<?= ValorPost('fechaRealizacion') ?>">
         <?= VerError('fechaRealizacion') ?>
         <br>
+        <div>
         <button type="submit" class="btn btn-primary mb-3" name="">Añadir</button>
-
+        <a style="margin-bottom: 16px" class="btn btn-danger" href="../controllers/procesarlistaTareas.php">Volver a tareas <i class="fa-solid fa-backward"></i></a>
+        </div>
     </form>
     @endsection
 </body>

@@ -1,8 +1,23 @@
 <?php
+
+/**
+ * validar_usuario
+ * @param  string $correo es un string que contiene el correo
+ * @param  string $contraseña es un string que contiene la contraseña
+ * @param  string $usuario es un string con el usuario
+ * @param  array $errores es un array en el que se almacenan los errores
+ * @param  array $recogida_campos es un array donde recogemos todos los campos recibidos por el método POSTS
+ * @param  void $datosTarea te devuelve la consulta de los datos de la tarea
+ */
+
 include("utilsforms.php");
 include("../models/bd.php");
 include("../models/claseusuarios.php");
 include('../controllers/varios.php');
+
+include('../libraries/validaremail.php');
+include('../libraries/validarCadenaNum.php');
+
 
 if (isset($_SESSION)) {
     session_destroy();
@@ -10,7 +25,10 @@ if (isset($_SESSION)) {
 
 $bd = BD::getInstance();
 
-if (!$_POST) { 
+$hayError = FALSE;
+$errores = [];
+
+if (!$_POST) {
     echo $blade->render('login');
 } else {
 
@@ -34,9 +52,31 @@ if (!$_POST) {
             $_SESSION['rol'] = "Operario";
         }
         
-       echo $blade->render('nada');   
+    } else {
+
+        /* Validar correo electrónico */
+        $correo = $_POST['correo'];
+        if (empty($correo) || !validarEmail($correo)) {
+            $errores['correo'] = 'El campo email está vacío o no es válido';
+            $hayError = TRUE;
+        }
+
+        /* Validar contraseña */
+        $contraseña = $_POST['contraseña'];
+        if (empty($contraseña) || !validarCadenaNum($contraseña)) {
+            $errores['contraseña'] = 'El campo contraseña no puede estar vacío ni contener caracteres especiales';
+            $hayError = TRUE;
+        }
+    }
+    
+    if ($hayError) {
+        
+        echo $blade->render('login');
 
     } else {
-        echo $blade->render('login');
+
+        echo $blade->render('inicio');
+
     }
+
 }

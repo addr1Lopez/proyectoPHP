@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * validarcif
+ *
+ * @param  string $cif es un string que indica el cif que queremos validar
+ * @return boolean devuelve un boolean true o false según si es válido el cif o no
+ */
 function validarcif($cif)
 {
 

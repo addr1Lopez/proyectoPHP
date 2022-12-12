@@ -1,4 +1,11 @@
 <?php
+/**
+ * getValues
+ *
+ * @param  array $recogida_campos recoge todos los campos con el metodo post
+ * @param  boolean $value es un boolean que puede ser true o false según si queremos que devuelva el campo o el valor de la tabla
+ * @return boolean devuelve un boolean true o false según si queremos que devuelva el campo o el valor de la tabla
+ */
 function getValues($recogida_campos, $value)
 {
     $nombre_campos = "";

@@ -90,7 +90,6 @@
             <br>
             <a style="margin-bottom: 16px" class="btn btn-danger" href="../controllers/procesarlistaTareas.php">Volver a tareas <i class="fa-solid fa-backward"></i></a>
             <a style="margin-bottom: 16px" class="btn btn-danger" href="../controllers/procesarTareasPendientes.php">Volver a tareas pendientes <i class="fa-solid fa-backward"></i></a>
-
         </div>
 
     </form>

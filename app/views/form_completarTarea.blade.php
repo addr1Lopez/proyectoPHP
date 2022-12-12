@@ -39,7 +39,7 @@
             <tr>
                 <td><?= $datosTarea['id'] ?></td>
                 <td><?= $datosTarea['nif_cif'] ?></td>
-                <td><?= $datosTarea['nombre'] ?></td>   
+                <td><?= $datosTarea['nombre'] ?></td>
                 <td><?= $datosTarea['textoDescripcion'] ?></td>
                 <td><?= $datosTarea['correo'] ?></td>
                 <td><?= $datosTarea['poblacion'] ?></td>
@@ -60,7 +60,7 @@
     <h2>Formulario para completar la tarea <?= $id ?> </h2>
     <form action="../controllers/validar_completarTarea.php?id=<?= $id ?>" method="post" enctype="multipart/form-data">
 
-    <label>Estado:</label>
+        <label>Estado:</label>
         <select class="form-select" name="estado" id="estado">
             <option value="0">--- Seleccione un estado de tarea ---</option>
             <option value="B" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'B' ? 'selected' : '' ?>>B - Esperando ser aprobada</option>
@@ -70,16 +70,21 @@
         </select>
 
         <label>Anotaciones anteriores:</label> <br> <textarea class="form-control" name="anotacionesAnt" id="anotaAnt" cols="30" rows="4"><?= isset($datosTarea["anotacionesAnt"]) ? $datosTarea["anotacionesAnt"] : "" ?></textarea>
+        <?= VerError('anotacionesAnt') ?>
         <br>
 
         <label>Anotaciones posteriores:</label> <br> <textarea class="form-control" name="anotacionesPos" id="anotaPos" cols="30" rows="4"><?= isset($datosTarea["anotacionesPos"]) ? $datosTarea["anotacionesPos"] : "" ?></textarea>
+        <?= VerError('anotacionesPos') ?>
         <br>
 
         <label>Fichero resumen:</label> <input type="file" class="form-control" name="fichResumen"><br>
 
         <label>Fotos del trabajo realizado:</label> <input type="file" class="form-control" name="fotos"><br>
 
-        <button type="submit" class="btn btn-primary mb-3" name="">Enviar</button>
+        <div>
+            <button type="submit" class="btn btn-primary mb-3" name="">Enviar</button>
+            <a style="margin-bottom: 16px" class="btn btn-danger" href="../controllers/procesarlistaTareas.php">Volver a tareas <i class="fa-solid fa-backward"></i></a>
+        </div>
         @endsection
     </form>
 </body>

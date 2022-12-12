@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * procesarVerDetalles
+ * @param  string $id es el id de la tarea
+ */
+
 include("../models/clasetarea.php");
 include("../models/bd.php");
 include("../libraries/creaTable.php");

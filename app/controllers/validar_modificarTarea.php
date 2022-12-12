@@ -1,4 +1,15 @@
 <?php
+
+/**
+ * validar_modificarTarea
+ * @param  string $id es el id de la tarea
+ * @param  string $blade es un string con el que vamos a mostrar la vista
+ * @param  boolean $hayError es un boolean con el que vamos a decir true o false para la validación en el formulario
+ * @param  array $errores es un array en el que se almacenan los errores
+ * @param  array $recogida_campos es un array donde recogemos todos los campos recibidos por el método POSTS
+ * @param  void $datosTarea te devuelve la consulta de los datos de la tarea
+ */
+
 include('../controllers/utilsforms.php');
 include('../controllers/varios.php');
 
@@ -13,6 +24,8 @@ include('../libraries/validarcif.php');
 include('../libraries/validaremail.php');
 include('../libraries/validarfecha.php');
 include('../libraries/validartelefono.php');
+include('../libraries/validarCadena.php');
+include('../libraries/validarCadenaNum.php');
 include('../libraries/getValues.php');
 include('../libraries/creaselect.php');
 include('../libraries/subirArchivos.php');
@@ -24,6 +37,8 @@ $errores = [];
 
 $conexion = BD::getInstance();
 
+if ($_SESSION['rol'] == "Administrador") {
+
 if (!$_POST) { // Si no han enviado el formulario
 
     $id = $_GET['id'];
@@ -34,19 +49,19 @@ if (!$_POST) { // Si no han enviado el formulario
 } else {
 
     /* Validar nombre */
-    if (isset($_POST['nombre']) && empty($_POST['nombre'])) {
+    if (isset($_POST['nombre']) && empty($_POST['nombre']) && !validarCadena($_POST['nombre'])) {
         $errores['nombre'] = 'El campo nombre no puede estar vacío';
         $hayError = TRUE;
     }
 
     /* Validar apellidos */
-    if (isset($_POST['apellidos']) && empty($_POST['apellidos'])) {
+    if (isset($_POST['apellidos']) && empty($_POST['apellidos']) && !validarCadena($_POST['apellidos'])) {
         $errores['apellidos'] = 'El campo apellidos no puede estar vacío';
         $hayError = TRUE;
     }
 
     /* Validar descripción */
-    if (isset($_POST['textoDescripcion']) && empty($_POST['textoDescripcion'])) {
+    if (isset($_POST['textoDescripcion']) && empty($_POST['textoDescripcion']) && !validarCadena($_POST['textoDescripcion'])) {
         $errores['textoDescripcion'] = 'El campo descripción no puede estar vacío';
         $hayError = TRUE;
     }
@@ -85,6 +100,7 @@ if (!$_POST) { // Si no han enviado el formulario
         $errores['fechaRealizacion'] = 'La fecha de realización está vacía o no es válida';
         $hayError = TRUE;
     }
+}
 
     if ($hayError) {
         $id = $_GET['id'];
@@ -111,4 +127,6 @@ if (!$_POST) { // Si no han enviado el formulario
         Tarea::modificar($id, getValues($recogida_campos, false), getValues($recogida_campos, true));
         header("location:procesarListaTareas.php");
     }
+} else {
+    header("location:procesarListaTareas.php");
 }

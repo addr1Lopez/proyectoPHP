@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * validarDni
+ *
+ * @param  string $dni es un string que indica el dni que queremos validar
+ * @return boolean devuelve un boolean true o false según si es válido el dni o no
+ */
 function validarDni($dni)
 {
     $dnisL = substr($dni, 0, -1);

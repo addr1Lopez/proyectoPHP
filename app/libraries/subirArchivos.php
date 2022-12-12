@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * subirArchivo
+ *
+ * @param  string $fich es un string que indica el campo fichero
+ * @param  string $id es un string que indica el id de la tarea
+ * @return void no devuelve nada, sube el archivo al directorio
+ */
 function subirArchivo($fich, $id)
 {
     $destino = __DIR__ . "/../../Files/";

@@ -11,7 +11,12 @@
 @extends('_template')
 
 @section('cuerpo')
-
+<br>
+<h2> Bienvenido a Construcciones López</h2>
+<br>
+<img src="../../Assets/img/inicio.jpg">
+<br>
+<br>
 @endsection
 </body>
 </html>

@@ -1,11 +1,20 @@
 <?php
+
+/**
+ * validar_AñadirUsuario
+ * @param  string $blade es un string con el que vamos a mostrar la vista
+ * @param  boolean $hayError es un boolean con el que vamos a decir true o false para la validación en el formulario
+ * @param  array $errores es un array en el que se almacenan los errores
+ * @param  array $recogida_campos es un array donde recogemos todos los campos recibidos por el método POSTS
+ */
+
+
 include('../controllers/utilsforms.php');
 include('../controllers/varios.php');
 
 include('../models/bd.php');
 include('../models/claseprovincia.php');
 include('../models/claseusuarios.php');
-include('../models/clasetarea.php');
 
 include('../libraries/validarcodpostal.php');
 include('../libraries/validardni.php');
@@ -34,7 +43,7 @@ if (!$_POST) { // Si no han enviado el formulario
     }
 
     /* Validar nombre */
-    if (isset($_POST['nombre']) && empty($_POST['nombre'])) {
+    if (isset($_POST['nombre']) && empty($_POST['nombre']) && !validarCadena($_POST['nombre'])) {
         $errores['nombre'] = 'El campo nombre no puede estar vacío';
         $hayError = TRUE;
     }
@@ -55,8 +64,8 @@ if (!$_POST) { // Si no han enviado el formulario
 
     /*PONER VALIDAR CONTRASEÑA*/
     $contraseña = $_POST['contraseña'];
-    if (empty($contraseña)) {
-        $errores['contraseña'] = 'El campo contraseña no puede estar vacío';
+    if (empty($contraseña) && !validarCadenaNum($_POST['nombre'])) {
+        $errores['contraseña'] = 'El campo contraseña está vacío o no es válido';
         $hayError = TRUE;
     }
 
@@ -66,7 +75,6 @@ if (!$_POST) { // Si no han enviado el formulario
         $errores['esAdmin'] = 'El campo administrador no puede estar vacío';
         $hayError = TRUE;
     }
-
 
     if ($hayError) {
         echo $blade->render('formulario_AñadirUsuario');

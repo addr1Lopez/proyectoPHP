@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * controladorBorrar
+ * @param  string $id es el id de la tarea
+ */
+
     include('../controllers/varios.php');
     
     session_start();

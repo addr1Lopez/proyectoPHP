@@ -13,7 +13,7 @@
 <body>
     @extends('_template')
     @section('cuerpo')
-
+    <br>
     <h2>Datos del usuario con NIF: <?= $nif ?> </h2>
     <table class="table table-striped table-hover">
         <thead class="table table-warning">
@@ -34,23 +34,23 @@
             <td><?= $datosUsuario['telefono'] ?></td>
             <td><?= $datosUsuario['esAdmin'] ?></td>
         </tr>
-        </table>
+    </table>
 
-            <form action="../controllers/validar_modificarUsuario.php?nif=<?= $nif ?>" method="post">
-                <h2>Modificar usuario con NIF <?= $nif ?> </h2>
-                <br>
-                <label>Correo electrónico:</label> <input type="text" class="form-control" name="correo" value="<?= isset($datosUsuario["correo"]) ? $datosUsuario["correo"] : ValorPost('correo') ?>">
-                <?= VerError('correo') ?>
-                <br>
+    <form action="../controllers/validar_modificarUsuario.php?nif=<?= $nif ?>" method="post">
+        <h2>Modificar usuario con NIF <?= $nif ?> </h2>
+        <br>
+        <label>Correo electrónico:</label> <input type="text" class="form-control" name="correo" value="<?= isset($datosUsuario["correo"]) ? $datosUsuario["correo"] : ValorPost('correo') ?>">
+        <?= VerError('correo') ?>
+        <br>
 
-                <label>Contraseña:</label> <input type="text" class="form-control" name="contraseña" value="<?= isset($datosUsuario["contraseña"]) ? $datosUsuario["contraseña"] : ValorPost('contraseña') ?>">
-                <br>
-                <div>
-                    <button type="submit" class="btn btn-primary mb-3" name="">Modificar</button>
-                    <a style="margin-bottom: 16px;" class="btn btn-danger" href="../controllers/procesarlistaUsuarios.php">Volver atrás <i class="fa-solid fa-backward"></i></a>
-                </div>
-            </form>
-            @endsection
+        <label>Contraseña:</label> <input type="text" class="form-control" name="contraseña" value="<?= isset($datosUsuario["contraseña"]) ? $datosUsuario["contraseña"] : ValorPost('contraseña') ?>">
+        <?= VerError('contraseña') ?>
+        <br>
+        <div>
+            <button type="submit" class="btn btn-primary mb-3" name="">Modificar</button>
+        </div>
+    </form>
+    @endsection
 </body>
 
 </html>

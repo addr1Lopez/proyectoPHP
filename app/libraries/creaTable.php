@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * creaTable
+ *
+ * @param  string $name especifica el nombre de la tabla
+ * @param  array $nombrecampos es un array que contiene los nombres de los campos según viene en la base de datos
+ * @param  array $nombresFormateados es un array que contiene los nombres de los campos pero con el formato cambiado
+ * @param  array $listaValores es un array indexado que contiene todos los campos y valores de la tabla
+ * @param  string $clavePrimaria es la clave primaria de la tabla especificada
+ * @return string devuelve un string que crea la tabla
+ */
 function creaTable($name, $nombrecampos, $nombresFormateados, $listaValores, $clavePrimaria)
 {
 

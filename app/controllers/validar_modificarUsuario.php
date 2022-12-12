@@ -1,4 +1,15 @@
 <?php
+
+/**
+ * validar_modificarUsuario
+ * @param  string $nif es el nif del usuario
+ * @param  string $blade es un string con el que vamos a mostrar la vista
+ * @param  boolean $hayError es un boolean con el que vamos a decir true o false para la validación en el formulario
+ * @param  array $errores es un array en el que se almacenan los errores
+ * @param  array $recogida_campos es un array donde recogemos todos los campos recibidos por el método POSTS
+ * @param  void $datosTarea te devuelve la consulta de los datos de la tarea
+ */
+
 include('../controllers/utilsforms.php');
 include('../controllers/varios.php');
 
@@ -13,6 +24,7 @@ include('../libraries/validarcif.php');
 include('../libraries/validaremail.php');
 include('../libraries/validarfecha.php');
 include('../libraries/validartelefono.php');
+include('../libraries/validarCadenaNum.php');
 include('../libraries/getValues.php');
 include('../libraries/creaselect.php');
 include('../libraries/subirArchivos.php');
@@ -40,10 +52,23 @@ if (!$_POST) { // Si no han enviado el formulario
         $hayError = TRUE;
     }
 
+    /* Validar contraseña */
+    $contraseña = $_POST['contraseña'];
+    if (empty($contraseña) || !validarCadenaNum($contraseña)) {
+        $errores['contraseña'] = 'El campo contraseña no puede estar vacío ni contener caracteres especiales';
+        $hayError = TRUE;
+    }
+    
+}
     if ($hayError) {
         $nif = $_GET['nif'];
-        echo $blade->render('formulario_modificarUsuario', ['nif' => $nif]);
+        
+        $datosUsuario = Usuario::getDatosUsuario($nif);
+
+        echo $blade->render('formulario_modificarUsuario', ['nif' => $nif], ['datosUsuario' => $datosUsuario] );
+
     } else {
+
         $nif = $_GET['nif'];
 
         $recogida_campos = $_POST;
@@ -51,4 +76,4 @@ if (!$_POST) { // Si no han enviado el formulario
         Usuario::modificar($nif, getValues($recogida_campos, false), getValues($recogida_campos, true));
         header("location:procesarListaUsuarios.php");
     }
-}
+
